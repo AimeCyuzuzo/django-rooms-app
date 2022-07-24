@@ -1,0 +1,30 @@
+            <hr>
+            <div>
+                {% for message in room_messages %}
+
+                    <div>
+                        <div>
+                            <span>
+                                
+                                    {% if request.user != message.user %}
+                                        <a href="{% url 'profile' message.user %}">@{{ message.user }}</a>
+                                    {% else %}
+                                        <a href="{% url 'profile' message.user %}">You</a>
+                                    {% endif %}
+                                
+                                <span>{{ message.created|timesince }} ago</span>
+                                <p>
+                                    replied to " {{ message.room }} "
+                                </p>
+                                <p>
+                                    {{ message }}
+                                </p>
+                                {% if request.user == message.user %}
+                                    <a href="{% url 'delete-message' message.id %}">Delete</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>

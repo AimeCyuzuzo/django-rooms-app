@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div>
+            <label for="topic">Topic</label>
+            <input type="text" id="topic" name="topic" placeholder="Topic" required>
+        </div>
+        <div>
+            <label for="name">Name</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="description">Description</label>
+            {{ form.description }}
+        </div>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+{% endblock content %}

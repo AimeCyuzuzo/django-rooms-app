@@ -1,0 +1,21 @@
+<div>
+    {% for room in rooms %}
+
+    <h5>
+        <a href="{% url 'profile' room.host.username %}">@{{room.host.username}}</a>
+    </h5>
+    <a href="{% url 'room' room.id %}"><p>{{room.name}}</p></a>
+    <span>{{room.topic.name}}</span>
+    <p>
+         
+        {% if room.participants.count > 1 %}
+            {{ room.participants.count }} participants
+        {% elif room.participants.count == 0 %}
+            No participants
+        {% else %}
+            {{ room.participants.count }} participant
+        {% endif %}
+    </p>
+    <hr>
+    {% endfor %}
+</div>

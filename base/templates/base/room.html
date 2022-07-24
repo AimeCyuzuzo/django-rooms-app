@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+    <style>
+        .room-container{
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+        }
+    </style>
+
+    <div class="room-container">
+        <section>
+            <div class="room-header">
+                <h1>
+                    {{ room.name }} <br>
+                    {{ room.description }} <br>
+                </h1>
+                {% if request.user.is_authenticated %}
+
+                    {% if request.user == room.host %}
+
+                        <h2>
+                            <a href="{% url 'update-room' room.id %}">Edit</a>
+                        </h2>
+                        <h2>
+                            <a href="{% url 'delete-room' room.id %}">
+                                Delete room
+                            </a>
+                        </h2>
+                    {% endif %}
+                {% endif %} 
+            </div>
+            <div class="comment-wrapper">
+                <h3>Conversations</h3>
+        
+                {% if request.user.is_authenticated %}
+                    <div class="comment-form">
+                        <form action="{% url 'room' room.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="body" placeholder="Write your message here..." required>
+                        </form>
+                    </div>
+                {% endif %}
+        
+                {% for message in room_messages %}
+        
+                <div>
+                    <div>
+                        <span>@{{ message.user }}</span>
+                        <span>{{ message.created|timesince }} ago</span>
+                    </div>
+                    <div>
+                        <p>
+                            {{ message.body }}
+                        </p>
+                    </div>
+                    {% if request.user == message.user %}
+                    <div>
+                        <small>
+                            <a href="{% url 'delete-message' message.id %}">Delete</a>
+                        </small>
+                    </div>
+                    {% endif %}
+                </div>
+                <hr>
+        
+                {% endfor %}
+            </div>
+        </section>
+        <section class="participants">
+            <h3>Participants </h3>
+            {% for participant in participants %}
+                <p>@{{ participant }}</p>
+            {% endfor %}
+        </section>
+    </div>
+
+{% endblock content %}

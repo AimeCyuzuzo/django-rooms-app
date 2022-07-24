@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+
+        
+        
+        <div>
+            <label for="profile-picture">Profile picture</label>
+            <input type="file" id="profile-picture">
+        </div>
+        {% for field in form %}
+            <div>
+                <label for="">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}            
+        <!-- <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+        </div> -->
+        <div>
+            <label for="bio">Bio</label>
+            <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <p>
+                <a href="{% HTTP_REFERER %{">Cancel</a>
+            </p>
+            <p>
+                <input type="submit" value="Update">
+            </p>
+        </div>
+    </form>
+
+{% endblock content %}

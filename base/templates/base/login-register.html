@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% if page == 'login' %}
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+        <input required type="text" name="username" placeholder="Username">
+            <br>
+            <input required type="password" name="password" placeholder="Password">
+            <br>
+
+
+            <input required type="submit" name="Log in">
+            <div>
+                <p>No account yet?</p>
+                <a href="{% url 'signup' %}">Sign up</a>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+
+{% if page == 'signup' %}
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="first_name">First name:</label>
+                <input required type="text" id="first_name" name="firstname">
+            </div>
+            <div>
+                <label for="othernames">Other names:</label>
+                <input required type="text" id="othernames name="othernames>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" required name="email" id="email">
+            </div>
+            <div>
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div>
+                <label for="age">Age:</label>
+                <input required type="number" id="age" name="age" min="5" max="150">
+            </div>
+            <div>
+                <label for="profile">Profile picture</label>
+                <input type="file" name="profile" id="profile">
+            </div>
+            <div>
+                <label for="bio">Short bio:</label>
+                <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
+            </div>
+            
+            {{ form.as_p }}
+
+            
+
+            <input type="submit" name="Sign up">
+            <div>
+                <p>Already have an account?</p>
+                <a href="{% url 'login' %}">Log in</a>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+{% endblock content %}
