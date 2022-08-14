@@ -17,7 +17,7 @@ class Topic(models.Model):
 
 class Profile(models.Model):
     owner = models.OneToOneField(User, blank=True,null=True, on_delete=models.CASCADE)
-    profilePicture = models.ImageField(default='avatar.png')
+    profilePicture = models.ImageField(default='avatar.png',null=True,blank=True)
     bio = models.TextField(null=True, blank=True)
     firstname = models.CharField(max_length=35,null=True)
     othernames = models.CharField(max_length=35, null=True)
