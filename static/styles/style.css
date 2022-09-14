@@ -7,3 +7,8 @@ body{
 input, textarea{
     color: rgb(0, 55, 80) !important;
 }
+.search-bar{
+    border: none;
+    outline: none;
+    background: red !important;
+}

@@ -15,10 +15,11 @@
         </section>
         <section>
         <div>
-            <img src="sksk/dkd.png" alt="Profile">
+            <img width="150px" height="100px" src="{{ request.user.profile.profilePicture.url }}" alt="Profile">
             <p>
                 {{ user.username }}
             </p>
+            {{ request.user.profile.bio }}
             {% if request.user.username == user.username %}
                 <p>
                     <a href="{% url 'update-user' %}">Edit profile</a>

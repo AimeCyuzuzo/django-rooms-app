@@ -10,7 +10,7 @@
         
         <div>
             <label for="profile-picture">Profile picture</label>
-            <input type="file" id="profile-picture">
+            <input type="file" name="profilepic" id="profile-picture">
         </div>
         {% for field in form %}
             <div>
@@ -32,7 +32,7 @@
         </div>
         <div>
             <p>
-                <a href="{% HTTP_REFERER %{">Cancel</a>
+                <a href="{{ HTTP_REFERER }}">Cancel</a>
             </p>
             <p>
                 <input type="submit" value="Update">

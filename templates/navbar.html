@@ -6,16 +6,26 @@
         display: flex;
         justify-content: space-between;
         padding: 0 2%;
+        background: rgb(0, 79, 116);
+        margin: 0 !important;
+        padding: 5px;
+    }
+    nav a{
+        color: rgb(213, 241, 255) !important;
+    }
+    .home{
+        font-size: x-large;
     }
 </style>
 
 
 <nav>
     <div>
-        <a href="/">Home</a>
+        {{ request.user.profile.profilePicture.url }}
+        <a class="nav-links home" href="/">Home</a>
     </div>
     <form method="GET" action="{% url 'home' %}">
-        <input type="text" name="q" placeholder="Search anything...">
+        <input class="search-bar" type="text" name="q" placeholder="Search anything...">
     </form>
 
         <div style="position: relative;">
@@ -47,10 +57,9 @@
                     </div>
             {% else %}
 
-                    <a href="{% url 'login' %}">Log in</a>
-                    <a href="{% url 'signup' %}">Create account</a>
+                    <a href="{% url 'login' %}" class="nav-links">Log in</a>
+                    <a href="{% url 'signup' %}" class="nav-links">Create account</a>
 
             {% endif %}
         </div>
 </nav>
-<hr>

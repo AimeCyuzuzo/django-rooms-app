@@ -251,7 +251,8 @@ def update_user(request):
     if request.method == 'POST':
         form = UpdateUserForm(request.POST, instance=request.user)
         if form.is_valid():
-            
+                request.user.profile.profilePicture = request.POST.get('profilepic')
+                request.user.profile.bio = request.POST.get('bio')
                 form.save()
                 return redirect('profile', username=request.user.username)
         else:

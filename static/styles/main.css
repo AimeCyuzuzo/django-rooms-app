@@ -1,9 +1,58 @@
 body{
-    background: red !important;
+    background: rgb(0, 40, 58) !important;
+    margin: 0 !important;
+    font-family: verdana;
+    color: white;
 }
-*{
-    background-color: red !important;
+nav{
+    background: rgb(255, 255, 255) !important;
 }
-input{
-    color: black !important;
+input, textarea{
+    color: rgb(0, 55, 80) !important;
+}
+.search-bar{
+    border-width: 4px;
+    border-color: rgb(5, 95, 136);
+    border-style: double;
+    outline: none;
+    padding: 4px 6px;
+    border-radius: 5px;
+    transition: 0.5s;
+    background: rgb(202, 225, 233);
+}
+.search-bar:focus{
+    border-width: 4px;
+    border-color: rgb(5, 95, 136);
+    border-style: double;
+}
+.nav-links{
+    text-decoration: none;
+    position: relative;
+}
+.nav-links::after{
+    position: absolute;
+    bottom: -20px;
+    z-index: 999;
+    right: -10px;
+    background: red;
+    width: 20px;
+    height: 20px;
+}
+.nav-links:hover{
+    color: rgb(197, 226, 236);
+}
+.browse-topics h2{
+    color: rgb(5, 95, 136);
+}
+.browse-topics h3 a, .topic-name a{
+    text-decoration: none;
+}
+.browse-topics h3 a:hover, .topic-name a:hover{
+    color: rgb(5, 95, 136) !important;
+}
+.browse-topics .topics-separator{
+    border: 5px double rgb(5, 95, 136);
+}
+.create-room-header a{
+    text-decoration: none !important;
 }

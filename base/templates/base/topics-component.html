@@ -1,11 +1,12 @@
 <div class="browse-topics side-bar">
     <h2>Browse topics</h2>
+    <h1 class="topics-separator"></h1>
     <div>
         <h3>
-            <a href="{% url 'home' %}">All</a>
+            <a class="topic-name" href="{% url 'home' %}">All</a>
         </h3>
         {% for topic in topics %}
-            <h3> <a href="{% url 'home' %}?q={{topic.name}}">{{ topic.name }}</a> </h3>
+            <h3> <a class="topic-name" href="{% url 'home' %}?q={{topic.name}}">{{ topic.name }}</a> </h3>
         {% endfor %}
     </div>
 </div>
