@@ -22,6 +22,7 @@ input, textarea{
 }
 .search-bar:focus{
     border-width: 4px;
+    border-color: rgb(212, 241, 255);
     border-color: rgb(5, 95, 136);
     border-style: double;
 }

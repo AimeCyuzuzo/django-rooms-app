@@ -3,7 +3,6 @@ from unicodedata import name
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from matplotlib.style import context
 from .models import Message, Room, Topic, Profile
 from .forms import RoomForm, UpdateUserForm
 from django.db.models import Q
@@ -55,6 +54,7 @@ def login_page(request):
     return render(request, 'base/login-register.html', context)
 
 
+@login_required(login_url='login')
 def signup_page(request):
     page = 'signup'
     form = UserCreationForm
@@ -125,6 +125,7 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 
+@login_required(login_url='login')
 def room(request, id):
 
     # room = None
@@ -133,14 +134,15 @@ def room(request, id):
     #         room = r
 
     room = Room.objects.get(id=id)
-    room_messages = room.message_set.all().order_by('-created')
+    room_messages = room.message_set.all().order_by('created')
     participants = room.participants.all()
 
     if request.method == 'POST':
         room_message = Message.objects.create(
             user = request.user,
             room= room,
-            body=request.POST.get('body')
+            body=request.POST.get('body'),
+            messageReplyingConnection=request.POST.get('')
         )
         room.participants.add(request.user)
         return redirect('room',id=room.id)
@@ -154,7 +156,9 @@ def room(request, id):
 
 @login_required(login_url='login')
 def create_room(request):
+    topics = Topic.objects.all()
     form = RoomForm()
+    currentTopic = ""
     if request.method == 'POST':
         form = RoomForm(request.POST)
         topic_name = request.POST.get('topic')
@@ -179,7 +183,7 @@ def create_room(request):
         #     room.host = request.user
         #     room.save()
         #     return redirect('home')
-    context = {'form': form}
+    context = {'form': form, 'topics': topics,'currentTopic': currentTopic}
     return render(request, 'base/room-form.html', context)
 
 
@@ -187,16 +191,21 @@ def create_room(request):
 def update_room(request, id):
     room = Room.objects.get(id=id)
     form = RoomForm(instance=room)
+    topics = Topic.objects.all()
+    currentTopic = room.topic
 
     if request.user  != room.host:
         return HttpResponse("You are not allowed to edit this room.")
     
     if request.method == 'POST':
-        form = RoomForm(request.POST, instance=room)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    context = {'form':form}
+        room.topic = request.POST.get('topic')
+        room.name = request.POST.get('name')
+        room.bio = request.POST.get('bio')
+        # form = RoomForm(request.POST, instance=room)
+        # if form.is_valid():
+        #     form.save()
+        #     return redirect('home')
+    context = {'form':form,'topics':topics,'currentTopic':currentTopic}
     return render(request, 'base/room-form.html', context)
 
 @login_required(login_url='login')
@@ -229,11 +238,12 @@ def delete_message(request, id):
 
 
 
+@login_required(login_url='login')
 def logoutUser(request):
     logout(request)
     return redirect('home')
 
-
+@login_required(login_url='login')
 def user_profile(request, username):
     user = User.objects.get(username=username)
     rooms = user.room_set.all()

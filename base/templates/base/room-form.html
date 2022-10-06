@@ -8,7 +8,20 @@
 
         <div>
             <label for="topic">Topic</label>
-            <input type="text" id="topic" name="topic" placeholder="Topic" required>
+            {% if currentTopic == "" %}
+                <input list="topicsList" type="text" id="topic" name="topic" placeholder="Topic" required>
+            {% else %}
+                <input list="topicsList" type="text" value={{ currentTopic }} id="topic" name="topic" placeholder="Topic" required>
+            {% endif %}
+            <datalist id="topicsList" name="topicsList">
+                {% for option in topics %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </datalist>
+                
+            </select>
+            {% comment %} {{ form }} {% endcomment %}
+            {% comment %} {{ form.topic }} {% endcomment %}
         </div>
         <div>
             <label for="name">Name</label>

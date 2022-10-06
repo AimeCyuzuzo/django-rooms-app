@@ -6,7 +6,7 @@
         display: flex;
         justify-content: space-between;
         padding: 0 2%;
-        background: rgb(0, 79, 116);
+        background: rgb(0, 79, 116) !important;
         margin: 0 !important;
         padding: 5px;
     }
@@ -21,38 +21,45 @@
 
 <nav>
     <div>
-        {{ request.user.profile.profilePicture.url }}
         <a class="nav-links home" href="/">Home</a>
     </div>
     <form method="GET" action="{% url 'home' %}">
-        <input class="search-bar" type="text" name="q" placeholder="Search anything...">
+        <input class="search-bar" style="background: white !important;" type="text" name="q" placeholder="Search anything...">
+        <h1 style="color:red;">WORK ON ROOM EDITING FORM</h1>
+        <h1 style="color:red;">ADD NOTIFICATIONS PAGE</h1>
     </form>
 
         <div style="position: relative;">
             {% if request.user.is_authenticated %}
                     <div style="display: grid;grid-template-columns: 3fr 1fr;">
-                        @{{ request.user.username }}
-                        <img style="width:50px;height:50px;" src="{{ request.user.profile.profilePicture.url }}" alt="Profile">
                        
                         <section onmouseover="document.querySelector('.hiddennav').style.display = 'block'" onmouseleave="document.querySelector('.hiddennav').style.display = 'none'" style="padding-left: 8px;cursor: pointer;">
-                            D
+                            
+                            @{{ request.user.username }}
                         </section>
                     </div>
                     <style>
                         .hiddennav{
                             display: none;
                             transition: 0.5s;
+                            background:rgb(202, 225, 233);
+                            position: absolute;
+                            padding-right: 35%;
+                            color: rgb(0, 57, 83) !important;
+                        }
+                        .hiddennav a{
+                            color: rgb(0, 57, 83) !important;
                         }
                     </style>
-                    <div class="hiddennav" onmouseover="this.style.display = 'block' " onmouseleave="this.style.display = 'none'" style="position: absolute;background: red;padding-right: 35%;">
+                    <div class="hiddennav" onmouseover="this.style.display = 'block' " onmouseleave="this.style.display = 'none'">
                             <!-- <ul style="list-style: none;"> -->
-                                <span>Profile</span><br>
+                                <p>
+                                    <a href="{% url 'profile' request.user.username %}">Profile</ap>
+                                </p>
                                 <span>
                                     <a href="{% url 'logout' %}">Logout</a>
-                                </span>0789127212
+                                </span>
                                 <br>
-                                <h1>{{ request.user.profile.profilePicture }}</h1>
-                                <h1>{{ request.user.profile.age }}</h1>
                             <!-- </ul> -->
                     </div>
             {% else %}

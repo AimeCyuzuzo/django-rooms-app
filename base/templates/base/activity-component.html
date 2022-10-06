@@ -14,9 +14,9 @@
                                 
                                 <span>{{ message.created|timesince }} ago</span>
                                 <p>
-                                    replied to " {{ message.room }} "
+                                    replied to " <a href="room/{{message.room.id}}">{{ message.room }}</a> "
                                 </p>
-                                <p>
+                                <p style="padding:5px;background:rgb(5, 95, 136);">
                                     {{ message }}
                                 </p>
                                 {% if request.user == message.user %}

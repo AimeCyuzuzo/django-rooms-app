@@ -57,3 +57,9 @@ class Message(models.Model):
     def __str__(self):
         return self.body[0:50]
 
+class messageReplyingConnection(models.Model):
+    message = models.OneToOneField(Message, blank=True,null=True, on_delete=models.CASCADE)
+
+class messageYouAreReplyingTo(models.Model):
+    messageYouAreReplyingTo = models.OneToOneField(messageReplyingConnection,blank=True,null=True,on_delete=models.CASCADE)
+    message = models.OneToOneField(Message,blank=True,null=True,on_delete=models.CASCADE)

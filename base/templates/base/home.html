@@ -11,19 +11,28 @@
             padding: 0 1%;
         }
     </style>
+        {% if request.user.is_authenticated %}
+        <div class="home-container">
+            {% include 'base/topics-component.html' %}
+            <div class="create-room-header">
+                <h5>{{ room_count }} rooms</h5>
+                <br>
+                <a href="{% url 'create-room' %}">Create room</a>
+                {% include 'base/feed-component.html' %}
+            </div>
+            <div>
+                <h3>Recent activities</h3>
+                {% include 'base/activity-component.html' %}
+            </div>
+        </div>
+        {% else %}
+
+        
+        <a href="{% url 'login' %}" class="nav-links">Log in</a>
+        <a href="{% url 'signup' %}" class="nav-links">Create account</a>
+
+    {% endif %}
+
     
-    <div class="home-container">
-        {% include 'base/topics-component.html' %}
-        <div class="create-room-header">
-            <h5>{{ room_count }} rooms</h5>
-            <br>
-            <a href="{% url 'create-room' %}">Create room</a>
-            {% include 'base/feed-component.html' %}
-        </div>
-        <div>
-            <h3>Recent activities</h3>
-            {% include 'base/activity-component.html' %}
-        </div>
-    </div>
 
 {% endblock content %}

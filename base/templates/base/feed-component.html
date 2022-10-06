@@ -1,21 +1,45 @@
+
 <div>
     {% for room in rooms %}
+        <div class="singleRoom">
+                <h5>
+                    {% if room.host.username %}
+                        Created by <a class="roomCreator" href="{% url 'profile' room.host.username %}">@{{room.host.username}}</a>
+                    {% else %}
+                        <span style="color: orange;">Creator unavailable</span>
+                    {% endif %}
+                </h5>
+            <a href="{% url 'room' room.id %}"><p>{{room.name}}</p>
 
-    <h5>
-        <a href="{% url 'profile' room.host.username %}">@{{room.host.username}}</a>
-    </h5>
-    <a href="{% url 'room' room.id %}"><p>{{room.name}}</p></a>
-    <span>{{room.topic.name}}</span>
-    <p>
-         
-        {% if room.participants.count > 1 %}
-            {{ room.participants.count }} participants
-        {% elif room.participants.count == 0 %}
-            No participants
-        {% else %}
-            {{ room.participants.count }} participant
-        {% endif %}
-    </p>
-    <hr>
+                <div>
+                    <span>{{room.topic.name}}</span>
+                    <p>
+                        
+                        {% if room.participants.count > 1 %}
+                            {{ room.participants.count }} participants
+                        {% elif room.participants.count == 0 %}
+                            No participants
+                        {% else %}
+                            {{ room.participants.count }} participant
+                        {% endif %}
+                    </p>
+                </div>
+            </a>
+            <hr>
+        </div>
+        <style>
+            .singleRoom{
+                background: rgb(5, 95, 136) !important;
+                margin: 40px 0s;
+            }
+            .singleRoom:hover{
+                background: rgb(0, 74, 108) !important;
+                transition: 0.5s;
+            }
+            .roomCreator{
+                color: rgb(160, 219, 247);
+                text-decoration: underline;
+            }
+        </style>
     {% endfor %}
 </div>

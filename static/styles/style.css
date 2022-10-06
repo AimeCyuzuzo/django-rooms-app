@@ -1,5 +1,5 @@
 body{
-    background: rgb(0, 55, 80) !important;
+    background: rgb(0, 29, 42) !important;
 }
 *{
     color: white;
@@ -10,5 +10,9 @@ input, textarea{
 .search-bar{
     border: none;
     outline: none;
-    background: red !important;
+    background: white !important;
+}
+
+#trialshit{
+    color: rgb(206, 55, 0);
 }
